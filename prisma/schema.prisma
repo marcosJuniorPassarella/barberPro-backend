@@ -23,3 +23,14 @@ model User {
 
   @@map("users")
 }
+
+model Subscription {
+  id      String @id
+  status  String
+  priceId String
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("subscriptions")
+}
