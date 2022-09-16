@@ -18,8 +18,9 @@ model User {
   password           String
   stripe_customer_id String? //assinatura do cliente
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
+  created_at    DateTime?     @default(now())
+  updated_at    DateTime?     @default(now())
+  subscriptions Subscription?
 
   @@map("users")
 }
@@ -31,6 +32,8 @@ model Subscription {
 
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
+  userId     String    @unique
+  user       User      @relation(fields: [userId], references: [id])
 
   @@map("subscriptions")
 }
