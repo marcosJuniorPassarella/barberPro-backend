@@ -21,6 +21,8 @@ model User {
   created_at    DateTime?     @default(now())
   updated_at    DateTime?     @default(now())
   subscriptions Subscription?
+  haircuts      Haircut[] // 1 usuário pode ter vários modelos de corte
+  services       Service[]
 
   @@map("users")
 }
@@ -36,4 +38,31 @@ model Subscription {
   user       User      @relation(fields: [userId], references: [id])
 
   @@map("subscriptions")
+}
+
+model Haircut {
+  id         String    @id @default(uuid())
+  name       String
+  price      Float
+  status     Boolean   @default(true)
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  user_Id    String
+  user       User      @relation(fields: [user_Id], references: [id])
+  services   Service[]
+
+  @@map("haircuts")
+}
+
+model Service {
+  id         String    @id @default(uuid())
+  customer   String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  haircut    Haircut   @relation(fields: [haircut_id], references: [id])
+  haircut_id String
+  user       User      @relation(fields: [user_id], references: [id])
+  user_id    String
+
+  @@map("services")
 }
