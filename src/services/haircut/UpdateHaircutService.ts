@@ -15,6 +15,19 @@ class UpdateHaircutService {
     price,
     status = true,
   }: HaircutRequest) {
+    const user = await prismaCLient.user.findFirst({
+      where: {
+        id: user_id,
+      },
+      include: {
+        subscriptions: true,
+      },
+    });
+
+    if (user?.subscriptions?.status !== "active") {
+      throw new Error("Not authorized");
+    }
+
     const haircut = await prismaCLient.haircut.update({
       where: {
         id: haircut_id,
