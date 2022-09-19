@@ -11,6 +11,25 @@ class CreateHaircutService {
       throw new Error("Error");
     }
 
+    const myHaircuts = await prismaCLient.haircut.count({
+      where: {
+        user_Id: user_id,
+      },
+    });
+
+    const user = await prismaCLient.user.findFirst({
+      where: {
+        id: user_id,
+      },
+      include: {
+        subscriptions: true,
+      },
+    });
+
+    if (myHaircuts >= 3 && user?.subscriptions?.status !== "active") {
+      throw new Error("Not authorized");
+    }
+
     const haircut = prismaCLient.haircut.create({
       data: {
         name: name,
