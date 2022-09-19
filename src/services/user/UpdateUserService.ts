@@ -41,3 +41,5 @@ class UpdateUserService {
     }
   }
 }
+
+export { UpdateUserService };
