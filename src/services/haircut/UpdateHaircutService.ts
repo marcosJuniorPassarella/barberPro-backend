@@ -8,7 +8,7 @@ interface HaircutRequest {
 }
 
 class UpdateHaircutService {
-  async handle({
+  async execute({
     user_id,
     haircut_id,
     name,
