@@ -5,6 +5,7 @@ import { CreateHaircutController } from "./controllers/haircut/CreateHaircutCont
 import { DetailHaircutController } from "./controllers/haircut/DetailHaircutController";
 import { ListHaircutController } from "./controllers/haircut/ListHaircutController";
 import { UpdateHaircutController } from "./controllers/haircut/UpdateHaircutController";
+import { NewScheduleController } from "./controllers/schedule/NewScheduleController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
@@ -19,12 +20,27 @@ router.post("/session", new AuthUserController().handle);
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 router.put("/users", isAuthenticated, new UpdateUserController().handle);
 
-// ---HAIRCUT ROUTES ---
+// --- HAIRCUT ROUTES ---
 router.post("/haircut", isAuthenticated, new CreateHaircutController().handle);
 router.put("/haircut", isAuthenticated, new UpdateHaircutController().handle);
 router.get("/haircuts", isAuthenticated, new ListHaircutController().handle);
-router.get("/haircut/check", isAuthenticated, new CheckSubscriptionController().handle);
-router.get("/haircut/count", isAuthenticated, new CountHaircutController().handle);
-router.get("/haircut/detail", isAuthenticated, new DetailHaircutController().handle);
+router.get(
+  "/haircut/check",
+  isAuthenticated,
+  new CheckSubscriptionController().handle
+);
+router.get(
+  "/haircut/count",
+  isAuthenticated,
+  new CountHaircutController().handle
+);
+router.get(
+  "/haircut/detail",
+  isAuthenticated,
+  new DetailHaircutController().handle
+);
+
+// --- SCHEDULE - SERVICE ROUTES
+router.post("/schedule", isAuthenticated, new NewScheduleController().handle);
 
 export { router };
