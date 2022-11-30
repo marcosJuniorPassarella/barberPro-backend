@@ -8,6 +8,7 @@ import { UpdateHaircutController } from "./controllers/haircut/UpdateHaircutCont
 import { FinishScheduleController } from "./controllers/schedule/FinishScheduleController";
 import { ListScheduleController } from "./controllers/schedule/ListScheduleController";
 import { NewScheduleController } from "./controllers/schedule/NewScheduleController";
+import { SubscribeController } from "./controllers/subscription/SubscribeController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
@@ -46,5 +47,8 @@ router.get(
 router.post("/schedule", isAuthenticated, new NewScheduleController().handle);
 router.get("/schedule", isAuthenticated, new ListScheduleController().handle);
 router.delete("/schedule", isAuthenticated, new FinishScheduleController().handle);
+
+// --- SUBSCRIPTIONS ---- ROTAS DE PAGAMENTOS
+router.post("/subscribe", isAuthenticated, new SubscribeController().handle)
 
 export { router };
